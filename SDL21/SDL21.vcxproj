@@ -81,7 +81,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameRect.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RayTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameRect.h" />

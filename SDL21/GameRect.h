@@ -3,6 +3,9 @@
 #include <memory>
 #include "RayTarget.h"
 
+
+struct RayTarget;
+
 using namespace std;
 
 struct GameRect
@@ -13,29 +16,9 @@ struct GameRect
 
     vector<RayTarget> rayTargets;
 
-    GameRect(int x, int y, int w, int h)
-    {
-        rect.x = x;
-        currentX = x;
-        rect.y = y;
-        currentY = y;
-        rect.w = w;
-        rect.h = h;
-        r = g = b = a = 0xff;
-    }
+    GameRect(int x, int y, int w, int h);
 
-    void Move(float x, float y){
-        prevX = currentX;
-        prevY = currentY;
-        currentX += x;
-        currentY += y;
-        rect.x = currentX;
-        rect.y = currentY;
-    }
+    void Move(float x, float y);
 
-    void UpdateRayTargets()
-    {
-        for (RayTarget r : rayTargets)
-            r.UpdateRays(rect.x + rect.w / 2, rect.y + rect.h / 2);
-    }
+    void UpdateRayTargets();
 };

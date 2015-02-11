@@ -90,11 +90,13 @@ int main(int, char**){
             for (shared_ptr<GameRect> collidable : gameData.collidables)
             {
                 if (rectCollision(actor, collidable))
+                {
                     resolveCollision(actor);
+                }
             }
         }
 
-
+        gameData.player->UpdateRayTargets();
 
         const Uint8* keyState = SDL_GetKeyboardState(NULL);
         float movementX = 0, movementY = 0;
@@ -120,17 +122,8 @@ int main(int, char**){
             SDL_SetRenderDrawColor(ren, (*r).r, (*r).g, (*r).b, (*r).a);
             SDL_RenderFillRect(ren, &(*r).rect);
         }
-
         for (RayTarget r : gameData.player->rayTargets)
-        {
             r.Render(ren);
-        }
-
-        SDL_SetRenderDrawColor(ren, 0xff, 0x00, 0x00, 0xff);
-        //for (Line l : gameData.player->rayTargets)
-        //{
-        //    SDL_RenderDrawLine(ren, l.x1, l.y1, l.x2, l.y2);
-        //}
 
         SDL_RenderPresent(ren);
     }
@@ -185,7 +178,7 @@ GameData initializeGame()
     {
         if (tempGameData.gameObjects[i] != player)
         {
-            player->rayTargets.emplace_back(tempGameData.gameObjects[i], player->rect.x, player->rect.y);
+            player->rayTargets.emplace_back(tempGameData.gameObjects[i], player->rect.x + player->rect.w / 2, player->rect.y + player->rect.h / 2);
         }
     }
     return tempGameData;
